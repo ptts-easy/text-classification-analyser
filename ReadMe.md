@@ -57,12 +57,12 @@
 
 ## 3. src/[natural](https://www.npmjs.com/package/natural)
 
->>  $ npm i natural
+  $ npm i natural
 
->### train
+### train
 
->>  $ npm run nt-train
+  $ npm run nt-train
 
->### predict
+### predict
   
->>  $ npm run nt-predict
+  $ npm run nt-predict
