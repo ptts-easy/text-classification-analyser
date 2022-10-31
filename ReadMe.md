@@ -1,68 +1,68 @@
 # Text Classification Analyser
 
-### Common Structure
+# Common Structure
 
-#### src/util
+## src/util
 
-###### src/util/[update-loger.js](https://www.npmjs.com/package/log-update)
+### src/util/[update-loger.js](https://www.npmjs.com/package/log-update)
   
   $ npm install log-update --save
 
   
-###### src/util/[progress-loger.js](https://www.npmjs.com/package/cli-progress)
+### src/util/[progress-loger.js](https://www.npmjs.com/package/cli-progress)
   
   $ npm install cli-progress --save
   $ npm install ansi-colors --save
 
-###### src/util/[spiliter-natural.js](https://www.npmjs.com/package/natural)
+### src/util/[spiliter-natural.js](https://www.npmjs.com/package/natural)
 
   $ npm i natural
 
-###### src/util/[spiliter-sentence-splitter.js](https://www.npmjs.com/package/sentence-splitter)
+### src/util/[spiliter-sentence-splitter.js](https://www.npmjs.com/package/sentence-splitter)
 
   $ npm i sentence-splitter
 
-###### src/util/[spiliter-sbd.js](https://www.npmjs.com/package/sbd)
+### src/util/[spiliter-sbd.js](https://www.npmjs.com/package/sbd)
 
   $ npm i sbd
 
-###### src/util/[spiliter-wink-nlp.js](https://www.npmjs.com/package/wink-nlp)
+### src/util/[spiliter-wink-nlp.js](https://www.npmjs.com/package/wink-nlp)
 
   $ npm i wink-nlp
   $ npm i wink-eng-lite-web-model
 
-#### 1. src/[ml-classify-text](https://www.npmjs.com/package/ml-classify-text)
+## 1. src/[ml-classify-text](https://www.npmjs.com/package/ml-classify-text)
 
   $ npm install ml-classify-text --save
 
-###### train
+### train
 
   $ npm run ml-train
 
-###### predict
+### predict
   
   $ npm run ml-predict
   
-#### 2. src/[whichx](https://www.npmjs.com/package/whichx)
+## 2. src/[whichx](https://www.npmjs.com/package/whichx)
 
   $ npm i whichx
 
-###### train
+### train
 
   $ npm run wx-train
 
-###### predict
+### predict
   
   $ npm run wx-predict
 
-#### 3. src/[natural](https://www.npmjs.com/package/natural)
+## 3. src/[natural](https://www.npmjs.com/package/natural)
 
   $ npm i natural
 
-###### train
+### train
 
   $ npm run nt-train
 
-###### predict
+### predict
   
   $ npm run nt-predict
