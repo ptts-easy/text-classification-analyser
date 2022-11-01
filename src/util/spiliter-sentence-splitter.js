@@ -1,6 +1,6 @@
 import { split, Syntax } from "sentence-splitter";
+import { split_sentences_show, split_count_show, split_time_show, INPUT_MIN_WORDS } from "../../config/config.js"
 
-const INPUT_MIN_WORDS = 5;
 
 function texts_paser(texts) {
   if(texts == undefined) {
@@ -53,22 +53,26 @@ function text_paser(text) {
   return choice_sentences;
 }
 
-export function spilitr_selftest() {
-  console.log("spilitr_selftest");
+export function selftest(texts) {
+  console.log("================ sentence-splitter_selftest ================");
 
-  const sentences = texts_paser([
-    "This is book. That is book and notebook. That is desk and chair",
-"The recovery and assimilation of \
-Greek works and Islamic inquiries into Western Europe from the 10th to 13th \
-century revived \"natural philosophy\",[7][9] which was later transformed by the Scientific \
-Revolution that began in the 16th century[10] as new ideas and discoveries departed from previous \
-Greek conceptions and traditions.[11][12] The scientific method soon played a greater role in knowledge \
-creation and it was not until the 19th century that many of the institutional and professional features of \
-science began to take shape;[13][14] along with the changing of \"natural philosophy\" to \"natural science\""
-    ]);
+  const start_time = new Date();
+  
+  const sentences = texts_paser(texts);
+  
+  const end_time = new Date();
 
-  console.log(sentences);
+  if (split_sentences_show == true) {
+    console.log(sentences);
+  }
 
+  if (split_count_show == true) {
+    console.log(sentences.length);
+  }
+    
+  if (split_time_show == true) {
+    console.log("split time :", (end_time.valueOf() - start_time.valueOf())/1000); 
+  }
 }
 
 export function spiliter(texts) {

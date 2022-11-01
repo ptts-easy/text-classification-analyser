@@ -1,4 +1,5 @@
 import {spiliter} from '../util/spiliter-wink-nlp.js';
+import esMain from 'es-main';
 import * as fs from 'fs';
 import * as mlct from 'ml-classify-text';
 import catgorys from '../../datasets/category.js';
@@ -28,7 +29,7 @@ function setup(predict) {
 }
 
 function predict() {
-  console.log("predict started !!!");
+//  console.log("predict started !!!");
 
   const start_time = new Date();
 
@@ -46,8 +47,6 @@ function predict() {
     const sentences = spiliter([text.toString()]);
 
     console.log(`Total sentences = ${sentences.length}`);
-
-//    console.log(sentences);
 
     for (let sentence of sentences) {
       let predictions = classifier.predict(sentence, 100, 0.0);
@@ -72,8 +71,6 @@ function predict() {
 
   const end_time = new Date();
 
-//  console.log(fRes);
-
 
   let sorted_result = [];
 
@@ -91,17 +88,13 @@ function predict() {
 
   console.log("Prediction Time :", (end_time.valueOf() - start_time.valueOf())/1000); 
 
-  console.log("predict ended !!!"); 
+//  console.log("predict ended !!!"); 
 }
 
-function predict_selftest() {
-  console.log("ml-classify-text/predict::predict_selftest()");
-}
-
-function main() {
-//  predict_selftest();
-
+export function main() {
   setup(predict);
 }
 
-main();
+if (esMain(import.meta)) {
+  main();
+}

@@ -12,6 +12,7 @@
 ### src/util/[progress-loger.js](https://www.npmjs.com/package/cli-progress)
   
   $ npm install cli-progress --save
+
   $ npm install ansi-colors --save
 
 ### src/util/[spiliter-natural.js](https://www.npmjs.com/package/natural)
@@ -29,7 +30,12 @@
 ### src/util/[spiliter-wink-nlp.js](https://www.npmjs.com/package/wink-nlp)
 
   $ npm i wink-nlp
+
   $ npm i wink-eng-lite-web-model
+
+### all test
+
+  $ npm run split
 
 ## 1. src/[ml-classify-text](https://www.npmjs.com/package/ml-classify-text)
 
@@ -66,3 +72,7 @@
 ### predict
   
   $ npm run nt-predict
+
+## all test
+
+  $ npm run all-predict

@@ -1,4 +1,5 @@
 import {spiliter} from '../util/spiliter-wink-nlp.js';
+import esMain from 'es-main';
 import * as fs from 'fs';
 import nt from 'natural';
 import catgorys from '../../datasets/category.js';
@@ -23,7 +24,7 @@ function setup(predict) {
 }
 
 function predict() {
-  console.log("predict started !!!");
+//  console.log("predict started !!!");
 
   const start_time = new Date();
 
@@ -40,22 +41,17 @@ function predict() {
 
   const end_time = new Date();
 
-
   console.log("Classification Result  ===> ", res_category);  
 
   console.log("Prediction Time :", (end_time.valueOf() - start_time.valueOf())/1000); 
 
-  console.log("predict ended !!!"); 
+//  console.log("predict ended !!!"); 
 }
 
-function predict_selftest() {
-  console.log("natural/predict::predict_selftest()");
-}
-
-function main() {
-//  predict_selftest();
-
+export function main() {
   setup(predict);
 }
 
-main();
+if (esMain(import.meta)) {
+  main();
+}
