@@ -49,16 +49,21 @@ function predict() {
     console.log(`Total sentences = ${sentences.length}`);
 
     for (let sentence of sentences) {
-      let predictions = classifier.predict(sentence, 100, 0.0);
+//      let predictions = classifier.predict(sentence, 100, 0.0);
+      let predictions = classifier.predict(sentence, 1, 0.0);
     
       if (predictions.length) {
         predictions.forEach(prediction => {
-//          console.log(`${prediction.label} (${prediction.confidence})`)
+/*
+          console.log(`${prediction.label} (${prediction.confidence})`)
           if(prediction.confidence > fMin) {
             fVal = fRes.get(prediction.label);
             fVal += Math.log(prediction.confidence);
             fRes.set(prediction.label, fVal);
           }
+*/
+          res_category = prediction.label;
+          console.log("Classification Result  ===> ", res_category);
         })
       } else {
         console.log('No predictions returned')
@@ -70,8 +75,7 @@ function predict() {
   }
 
   const end_time = new Date();
-
-
+/*
   let sorted_result = [];
 
   for (const [key, value] of fRes.entries()) {
@@ -80,12 +84,10 @@ function predict() {
 
   sorted_result.sort((a, b) => b.value - a.value);
 
-//  console.log(sorted_result);
-
   res_category = sorted_result[0].name;
 
-  console.log("Classification Result  ===> ", res_category);  
-
+  console.log("Classification Result  ===> ", res_category);
+*/
   console.log("Prediction Time :", (end_time.valueOf() - start_time.valueOf())/1000); 
 
 //  console.log("predict ended !!!"); 

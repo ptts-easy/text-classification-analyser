@@ -36,8 +36,14 @@ function predict() {
   
   try {
     const text = fs.readFileSync(test_path);
+    const sentences = spiliter([text.toString()]);
 
-    res_category = classifier.classify(text.toString());
+    console.log(`Total sentences = ${sentences.length}`);
+
+    for (let sentence of sentences) {
+      res_category = classifier.classify(sentence);
+      console.log("Classification Result  ===> ", res_category);
+    }
   } catch (err) {
     console.log(`read "${test_path}" file failed !!!`);
     console.log(err);
