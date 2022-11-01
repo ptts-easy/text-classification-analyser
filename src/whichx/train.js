@@ -3,8 +3,8 @@ import {spiliter} from '../util/spiliter-wink-nlp.js';
 import * as fs from 'fs';
 import WhichX from 'whichx';
 import catgorys from '../../datasets/category.js';
+import { train_path } from "../../config/config.js"
 
-const train_path = "./datasets/trains/";
 const module_path = "./src/whichx/model/model.json";
 
 let classifier = {};
@@ -12,14 +12,10 @@ let classifier = {};
 function setup(train) {
 
   if (fs.existsSync(module_path)) {
-    const data = fs.readFileSync(module_path);
+    const data = fs.readFileSync(module_path, 'utf8');
     const config = JSON.parse(data);
-
     classifier = new WhichX();
-//    classifier.addLabels(catgorys);
-
     classifier.import(config);
-    
     console.log("model loaded !!!");
     train();
   } else {
@@ -62,24 +58,6 @@ function train() {
 
 function train_selftest() {
   console.log("whichx/train::train_selftest()");
-
-  var classifier = new WhichX();
-  var validLabels = ["cat", "dog"];
-  var dataExport;
-
-  classifier.addLabels(validLabels);
-  classifier.addData("cat", "meow purr sits on lap");
-  classifier.addData("dog", "bark woof wag fetch");
-  dataExport = classifier.export();
-
-  const str_model = JSON.stringify(dataExport);
-
-  dataExport = JSON.parse(str_model);
-
-  classifier = new WhichX();
-  classifier.import(dataExport);
-
-  console.log(classifier.classify("who I am?"));
 }
 
 function main() {

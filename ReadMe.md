@@ -73,6 +73,22 @@
   
   $ npm run nt-predict
 
+## 4. src/[NLP.js](https://www.npmjs.com/package/node-nlp)
+
+  $ npm i node-nlp
+
+### train
+
+  $ npm run nn-train
+
+### predict
+  
+  $ npm run nn-predict
+
 ## all test
 
   $ npm run all-predict
+
+## contact
+
+  If you need to contact me, you can do it at the email faco0909@outlook.com

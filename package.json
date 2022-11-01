@@ -13,6 +13,8 @@
     "wx-predict": "node src/whichx/predict.js",
     "nt-train": "node src/natural/train.js",
     "nt-predict": "node src/natural/predict.js",
+    "nn-train": "node src/node-nlp/train.js",
+    "nn-predict": "node src/node-nlp/predict.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "type": "module",
@@ -26,6 +28,7 @@
     "log-update": "^5.0.1",
     "ml-classify-text": "^2.0.0",
     "natural": "^5.2.3",
+    "node-nlp": "^4.24.0",
     "sbd": "^1.0.19",
     "sentence-splitter": "^3.2.2",
     "whichx": "^3.0.1",

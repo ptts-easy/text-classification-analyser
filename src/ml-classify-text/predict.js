@@ -3,8 +3,8 @@ import esMain from 'es-main';
 import * as fs from 'fs';
 import * as mlct from 'ml-classify-text';
 import catgorys from '../../datasets/category.js';
+import { test_path } from "../../config/config.js"
 
-const test_path = "./datasets/test/test.txt";
 const module_path = "./src/ml-classify-text/model/model.json";
 
 const { Classifier, Model } = mlct.default;
@@ -14,13 +14,10 @@ let classifier = {};
 function setup(predict) {
 
   if (fs.existsSync(module_path)) {
-    const data = fs.readFileSync(module_path);
+    const data = fs.readFileSync(module_path, 'utf8');
     const config = JSON.parse(data);
-
     classifier = new Classifier();
-
     classifier.model = new Model(config);
-    
     console.log("model loaded !!!");
     predict();
   } else {

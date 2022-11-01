@@ -1,25 +1,26 @@
 import {logProgrss} from '../util/progress-loger.js';
 import {spiliter} from '../util/spiliter-wink-nlp.js';
 import * as fs from 'fs';
-import nt from 'natural';
+import { NlpManager } from 'node-nlp';
 import catgorys from '../../datasets/category.js';
 import { train_path } from "../../config/config.js"
 
-const module_path = "./src/natural/model/model.json";
+const module_path = "./src/node-nlp/model/model.nlp";
 
 let classifier = {};
 
 function setup(train) {
 
   if (fs.existsSync(module_path)) {
-    nt.BayesClassifier.load(module_path, null, function (err, new_classifier) {
-      if (err) console.log(err);
-      console.log("model loaded !!!");
-      classifier = new_classifier;
-      train();
-    });
+//    classifier.load(module_path);
+    const data = fs.readFileSync(module_path, 'utf8');
+    const config = JSON.parse(data);
+    classifier = new NlpManager();
+    classifier.import(config);
+    console.log("model loaded !!!");
+    train();
   } else {
-    classifier = new nt.BayesClassifier();
+    classifier = new NlpManager({ languages: ['en'], forceNER: true });
     train();
   }
 }
@@ -32,7 +33,7 @@ function train() {
       const text = fs.readFileSync(path.toString());
       const sentences = spiliter([text.toString()]);
       logProgrss(`${catgory}.txt`, "sentences", sentences.length, function(idx) {
-          classifier.addDocument(sentences[idx], catgory);
+          classifier.addDocument('en', sentences[idx], catgory);
           return idx + 1;
         },
         function(){
@@ -47,20 +48,26 @@ function train() {
     console.log("Time :", (end_time.valueOf() - start_time.valueOf())/1000);
   }
 
-  console.log("train started !!!");
-    
-  classifier.train();
-  
-  classifier.save(module_path, function (err, classifier) {
-    if (err) console.log(err)
-    console.log("trained Model saved !!!");
-  })
+  (async() => {
+    console.log("train started !!!");
 
-  console.log("train ended !!!"); 
+    const hrstart = process.hrtime();
+
+    await classifier.train();
+
+    const hrend = process.hrtime(hrstart);
+    console.info('Trained (hr): %ds %dms', hrend[0], hrend[1] / 1000000);
+
+//    classifier.save(module_path);
+    let model = classifier.export(true);
+    fs.writeFileSync(module_path, model, 'utf8');
+
+    console.log("train ended !!!"); 
+  })();
 }
 
 function train_selftest() {
-  console.log("natural/train::train_selftest()");
+  console.log("node-nlp/train::train_selftest()");
 }
 
 function main() {

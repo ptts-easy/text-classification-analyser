@@ -3,8 +3,8 @@ import esMain from 'es-main';
 import * as fs from 'fs';
 import nt from 'natural';
 import catgorys from '../../datasets/category.js';
+import { test_path } from "../../config/config.js"
 
-const test_path = "./datasets/test/test.txt";
 const module_path = "./src/natural/model/model.json";
 
 let classifier = {};
@@ -46,8 +46,6 @@ function predict() {
   }
 
   const end_time = new Date();
-
-  console.log("Classification Result  ===> ", res_category);  
 
   console.log("Prediction Time :", (end_time.valueOf() - start_time.valueOf())/1000); 
 
