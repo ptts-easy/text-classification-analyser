@@ -160,6 +160,24 @@
   $ npm run nb-predict
 ```
 
+## 8. src/[classificator](https://www.npmjs.com/package/classificator/v/0.1.3)
+
+```
+
+  npm i classificator
+```
+
+### train
+
+```
+  $ npm run cf-train
+```
+
+### predict
+
+```  
+  $ npm run cf-predict
+```
 ## all test
 
 ```

@@ -21,6 +21,8 @@
     "bc-predict": "node src/bayes-classifier/predict.js",
     "nb-train": "node src/nbayes/train.js",
     "nb-predict": "node src/nbayes/predict.js",
+    "cf-train": "node src/classificator/train.js",
+    "cf-predict": "node src/classificator/predict.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "type": "module",
@@ -31,6 +33,7 @@
     "ansi-colors": "^4.1.3",
     "bayes": "^1.0.0",
     "bayes-classifier": "^0.0.5",
+    "classificator": "^0.3.4",
     "cli-progress": "^3.11.2",
     "deasync": "^0.1.28",
     "es-main": "^1.2.0",
