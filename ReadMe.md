@@ -1,6 +1,6 @@
 # Text Classification Analyser
 
-# Sentnce Splite Analasis
+# Sentnce Splite Analysis
 
 ### src/util/[spiliter-natural.js](https://www.npmjs.com/package/natural)
 
@@ -29,7 +29,7 @@
 ```
   $ npm run split
 ```
-# Text Classification Analasis
+# Text Classification Analysis
 
 ## 1. src/[ml-classify-text](https://www.npmjs.com/package/ml-classify-text)
 
