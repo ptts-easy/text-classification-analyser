@@ -9,71 +9,69 @@ const module_path = "./src/node-nlp/model/model.nlp";
 
 let classifier = {};
 
-function setup(train) {
+async function setup() {
 
   if (fs.existsSync(module_path)) {
-//    classifier.load(module_path);
-    const data = fs.readFileSync(module_path, 'utf8');
-    const config = JSON.parse(data);
+    const model_json = fs.readFileSync(module_path, 'utf8');
+    const model_obj = JSON.parse(model_json);
     classifier = new NlpManager();
-    classifier.import(config);
+    classifier.import(model_obj);
     console.log("model loaded !!!");
-    train();
+
+//    classifier.load(module_path);
   } else {
     classifier = new NlpManager({ languages: ['en'], forceNER: true });
-    train();
   }
 }
 
-function train() {
+async function train() {
+  console.log("train started !!!");
+
+  const start_time = new Date();
+
   for (let catgory of catgorys) {
-    const start_time = new Date();    
     try {
       const path = `${train_path}${catgory}.txt`;
       const text = fs.readFileSync(path.toString());
       const sentences = spiliter([text.toString()]);
-      logProgrss(`${catgory}.txt`, "sentences", sentences.length, function(idx) {
+      await logProgrss(`${catgory}.txt`, "sentences", sentences.length, 
+        async function(idx) {
           classifier.addDocument('en', sentences[idx], catgory);
-          return idx + 1;
+          return [idx + 1, catgory];
         },
-        function(){
-          console.log(`${catgory}.txt file add documnet complated`);
+        async function(){
+//          console.log(`${catgory}.txt file train complated`);
         }
       );
     } catch (err) {
       console.log(`read "${train_path}${catgory}.txt" file failed !!!`);
       console.log(err);
     }
-    const end_time = new Date();
-    console.log("Time :", (end_time.valueOf() - start_time.valueOf())/1000);
   }
 
-  (async() => {
-    console.log("train started !!!");
+  const end_time = new Date();
+  console.log("Time :", (end_time.valueOf() - start_time.valueOf())/1000);
 
-    const hrstart = process.hrtime();
+  console.log("train started !!!");
 
-    await classifier.train();
+  const hrstart = process.hrtime();
 
-    const hrend = process.hrtime(hrstart);
-    console.info('Trained (hr): %ds %dms', hrend[0], hrend[1] / 1000000);
+  await classifier.train();
 
-//    classifier.save(module_path);
-    let model = classifier.export(true);
-    fs.writeFileSync(module_path, model, 'utf8');
+  const hrend = process.hrtime(hrstart);
+  console.info('Trained (hr): %ds %dms', hrend[0], hrend[1] / 1000000);
 
-    console.log("train ended !!!"); 
-  })();
+  console.log("train ended !!!");
+  
+  let model_json = classifier.export(true);
+  fs.writeFileSync(module_path, model_json, 'utf8');
+
+  console.log("model saved !!!");
 }
 
-function train_selftest() {
-  console.log("node-nlp/train::train_selftest()");
-}
-
-function main() {
-//  train_selftest();
-
-  setup(train);
+async function main() {
+  await setup();
+  await train();
 }
 
 main();

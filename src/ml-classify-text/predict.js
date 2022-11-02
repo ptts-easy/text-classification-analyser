@@ -10,22 +10,24 @@ const module_path = "./src/ml-classify-text/model/model.json";
 const { Classifier, Model } = mlct.default;
 
 let classifier = {};
+let label = "";
 
-function setup(predict) {
+async function setup() {
 
   if (fs.existsSync(module_path)) {
-    const data = fs.readFileSync(module_path, 'utf8');
-    const config = JSON.parse(data);
+    const model_json = fs.readFileSync(module_path, 'utf8');
+    const model_obj = JSON.parse(model_json);
     classifier = new Classifier();
-    classifier.model = new Model(config);
+    classifier.model = new Model(model_obj);
     console.log("model loaded !!!");
-    predict();
+    return true;
   } else {
     console.log("model don't exist !!!");
+    return false;
   }
 }
 
-function predict() {
+async function predict() {
 //  console.log("predict started !!!");
 
   const start_time = new Date();
@@ -60,7 +62,7 @@ function predict() {
           }
 */
           res_category = prediction.label;
-          console.log("Classification Result  ===> ", res_category);
+          console.log(label, "Classification Result  ===> ", res_category);
         })
       } else {
         console.log('No predictions returned')
@@ -72,6 +74,11 @@ function predict() {
   }
 
   const end_time = new Date();
+
+  console.log("Prediction Time :", (end_time.valueOf() - start_time.valueOf())/1000); 
+
+//  console.log("predict ended !!!"); 
+
 /*
   let sorted_result = [];
 
@@ -85,13 +92,14 @@ function predict() {
 
   console.log("Classification Result  ===> ", res_category);
 */
-  console.log("Prediction Time :", (end_time.valueOf() - start_time.valueOf())/1000); 
-
-//  console.log("predict ended !!!"); 
 }
 
-export function main() {
-  setup(predict);
+export async function main(_label) {
+  if (_label != undefined)
+    label = _label;
+  if (await setup() ==true) {
+    await predict();
+  }
 }
 
 if (esMain(import.meta)) {

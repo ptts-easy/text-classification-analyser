@@ -1,11 +1,11 @@
 import {spiliter} from '../util/spiliter-wink-nlp.js';
 import esMain from 'es-main';
 import * as fs from 'fs';
-import { NlpManager } from 'node-nlp';
+import { nbayes, createDoc, stringToDoc } from './nbayes.js';
 import catgorys from '../../datasets/category.js';
 import { test_path } from "../../config/config.js"
 
-const module_path = "./src/node-nlp/model/model.nlp";
+const module_path = "./src/nbayes/model/model.json";
 
 let classifier = {};
 let label = "";
@@ -15,7 +15,7 @@ async function setup() {
   if (fs.existsSync(module_path)) {
     const model_json = fs.readFileSync(module_path, 'utf8');
     const model_obj = JSON.parse(model_json);
-    classifier = new NlpManager();
+    classifier = nbayes();
     classifier.import(model_obj);
     console.log("model loaded !!!");
     return true;
@@ -39,8 +39,7 @@ async function predict() {
     console.log(`Total sentences = ${sentences.length}`);
 
     for (let sentence of sentences) {
-      let value = await classifier.process('en', sentence);
-      res_category = value.intent;
+      res_category = classifier.classify(stringToDoc(sentence));
       console.log(label, "Classification Result  ===> ", res_category);
     }
   } catch (err) {

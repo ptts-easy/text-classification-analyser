@@ -1,9 +1,9 @@
 import _progress from 'cli-progress';
 import _colors from 'ansi-colors';
 
-export function logProgrss(title, msg, total, onProcss, onComplete) {
+export async function logProgrss(title, msg, total, onProcss, onComplete) {
   const opt = {
-    format: `${title} |${_colors.cyan('{bar}')}| {percentage}% || ${msg}: {value}/{total} || Speed: {speed}`,
+    format: `${title} |${_colors.cyan('{bar}')}| {percentage}% || ${msg}: {value}/{total} || Category: {category}`,
     barCompleteChar: '\u2588',
     barIncompleteChar: '\u2591',
     hideCursor: true
@@ -13,21 +13,25 @@ export function logProgrss(title, msg, total, onProcss, onComplete) {
   // create new progress bar
   const pgbar = new _progress.Bar(opt);
 
-  // initialize the bar -  defining payload token "speed" with the default value "N/A"
-  pgbar.start(total, 0, {speed: "N/A"});
-
   let value = 0;
+  let category = "N/A";
 
-  const speedData = [];
+  // initialize the bar -  defining payload token "speed" with the default value "N/A"
+  pgbar.start(total, value, {category: category});
 
-  while(total > (value = onProcss(value))) {
+  while(true) {
+    ([value, category] = await onProcss(value));
+    if (total <= value) {
+      break;
+    }
     // update the bar value
-    pgbar.update(value, {speed: "Unknown Mb/s"});
+    pgbar.update(value, {category: category});
   }
 
-  pgbar.update(value, {speed: "Unknown Mb/s"});
+  pgbar.update(value, {category: category});
   pgbar.stop();
-  onComplete();
+  
+  await onComplete();
 }
 
 export function logProgresser_selftest() {

@@ -15,6 +15,12 @@
     "nt-predict": "node src/natural/predict.js",
     "nn-train": "node src/node-nlp/train.js",
     "nn-predict": "node src/node-nlp/predict.js",
+    "bs-train": "node src/bayes/train.js",
+    "bs-predict": "node src/bayes/predict.js",
+    "bc-train": "node src/bayes-classifier/train.js",
+    "bc-predict": "node src/bayes-classifier/predict.js",
+    "nb-train": "node src/nbayes/train.js",
+    "nb-predict": "node src/nbayes/predict.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "type": "module",
@@ -23,16 +29,21 @@
   "license": "ISC",
   "dependencies": {
     "ansi-colors": "^4.1.3",
+    "bayes": "^1.0.0",
+    "bayes-classifier": "^0.0.5",
     "cli-progress": "^3.11.2",
+    "deasync": "^0.1.28",
     "es-main": "^1.2.0",
     "log-update": "^5.0.1",
     "ml-classify-text": "^2.0.0",
     "natural": "^5.2.3",
+    "nbayes": "^4.0.0",
     "node-nlp": "^4.24.0",
     "sbd": "^1.0.19",
     "sentence-splitter": "^3.2.2",
     "whichx": "^3.0.1",
     "wink-eng-lite-web-model": "^1.4.3",
-    "wink-nlp": "^1.12.2"
+    "wink-nlp": "^1.12.2",
+    "word-regex": "^0.1.2"
   }
 }

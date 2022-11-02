@@ -8,22 +8,24 @@ import { test_path } from "../../config/config.js"
 const module_path = "./src/natural/model/model.json";
 
 let classifier = {};
+let label = "";
 
-function setup(predict) {
+async function setup() {
 
   if (fs.existsSync(module_path)) {
-    nt.BayesClassifier.load(module_path, null, function (err, new_classifier) {
-      if (err) console.log(err);
-      console.log("model loaded !!!");
-      classifier = new_classifier;
-      predict();
-    });
+    const model_json = fs.readFileSync(module_path, 'utf8');
+    const model_obj = JSON.parse(model_json);
+    classifier = model_obj;
+    nt.BayesClassifier.restore(classifier, null);
+    console.log("model loaded !!!");
+    return true;
   } else {
     console.log("model don't exist !!!");
+    return false;
   }
 }
 
-function predict() {
+async function predict() {
 //  console.log("predict started !!!");
 
   const start_time = new Date();
@@ -38,7 +40,7 @@ function predict() {
 
     for (let sentence of sentences) {
       res_category = classifier.classify(sentence);
-      console.log("Classification Result  ===> ", res_category);
+      console.log(label, "Classification Result  ===> ", res_category);
     }
   } catch (err) {
     console.log(`read "${test_path}" file failed !!!`);
@@ -52,8 +54,12 @@ function predict() {
 //  console.log("predict ended !!!"); 
 }
 
-export function main() {
-  setup(predict);
+export async function main(_label) {
+  if (_label != undefined)
+    label = _label;
+  if (await setup() ==true) {
+    await predict();
+  }
 }
 
 if (esMain(import.meta)) {
