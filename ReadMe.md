@@ -1,21 +1,7 @@
 # Text Classification Analyser
 
-# Common Structure
+# Sentnce Splite Analasis
 
-## src/util
-
-### src/util/[update-loger.js](https://www.npmjs.com/package/log-update)
-
-```  
-  $ npm install log-update --save
-```
-### src/util/[progress-loger.js](https://www.npmjs.com/package/cli-progress)
-  
-```
-  $ npm install cli-progress --save
-
-  $ npm install ansi-colors --save
-```
 ### src/util/[spiliter-natural.js](https://www.npmjs.com/package/natural)
 
 ```
@@ -43,6 +29,8 @@
 ```
   $ npm run split
 ```
+# Text Classification Analasis
+
 ## 1. src/[ml-classify-text](https://www.npmjs.com/package/ml-classify-text)
 
 ```
