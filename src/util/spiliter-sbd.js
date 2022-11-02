@@ -1,5 +1,5 @@
 import tokenizer from "sbd";
-import { split_sentences_show, split_count_show, split_time_show, INPUT_MIN_WORDS } from "../../config/config.js"
+import { split_sentences_show, split_count_show, split_time_show, INPUT_MIN_WORDS, INPUT_MAX_WORDS } from "../../config/config.js"
 
 const optional_options = {
   "newline_boundaries" : false,
@@ -44,6 +44,10 @@ function text_paser(text) {
     const words = sentence.split(" ");
 
     if(words.length < INPUT_MIN_WORDS) {
+      continue;
+    }
+
+    if(words.length > INPUT_MAX_WORDS) {
       continue;
     }
 

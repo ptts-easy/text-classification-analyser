@@ -2,7 +2,7 @@
 import winkNLP from 'wink-nlp';
 // Load english language model.
 import model from 'wink-eng-lite-web-model';
-import { split_sentences_show, split_count_show, split_time_show, INPUT_MIN_WORDS } from "../../config/config.js"
+import { split_sentences_show, split_count_show, split_time_show, INPUT_MIN_WORDS, INPUT_MAX_WORDS } from "../../config/config.js"
 
 // Instantiate winkNLP.
 const nlp = winkNLP( model );
@@ -47,6 +47,10 @@ function text_paser(text) {
     const words = sentence.split(" ");
 
     if(words.length < INPUT_MIN_WORDS) {
+      continue;
+    }
+
+    if(words.length > INPUT_MAX_WORDS) {
       continue;
     }
 

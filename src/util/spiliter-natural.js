@@ -1,5 +1,5 @@
 import natural from "natural"
-import { split_sentences_show, split_count_show, split_time_show, INPUT_MIN_WORDS } from "../../config/config.js"
+import { split_sentences_show, split_count_show, split_time_show, INPUT_MIN_WORDS, INPUT_MAX_WORDS } from "../../config/config.js"
 
 const sentence_tokenizer = new natural.SentenceTokenizer();
 const word_tokenizer = new natural.WordTokenizer();
@@ -38,6 +38,10 @@ function text_paser(text) {
     const words = word_tokenizer.tokenize(sentence);
 
     if(words.length < INPUT_MIN_WORDS) {
+      continue;
+    }
+
+    if(words.length > INPUT_MAX_WORDS) {
       continue;
     }
 
