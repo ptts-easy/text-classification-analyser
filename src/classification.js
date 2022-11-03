@@ -6,7 +6,7 @@ import { main as bs_predict } from './bayes/predict.js';
 import { main as bc_predict } from './bayes-classifier/predict.js';
 import { main as nb_predict } from './nbayes/predict.js';
 import { main as cf_predict } from './classificator/predict.js';
-import { ssleep } from './util/thread-mng.js';
+import { main as bp_predict } from './bayes-probas/predict.js';
 import esMain from 'es-main';
 
 async function main() {
@@ -41,6 +41,10 @@ async function main() {
   console.log("================= 8. classificator =================");
 
   await cf_predict("classificator => ");
+
+  console.log("================= 9. bayes-probas =================");
+
+  await bp_predict("bayes-probas => ");  
 }
 
 if (esMain(import.meta)) {
