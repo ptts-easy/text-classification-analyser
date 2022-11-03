@@ -4,16 +4,16 @@ This project is text classification analysis and sentence split analysis tool fo
 
 # Text Classification Analysis
 
-| No | Package | npm | train | predict | source |
-| ------ | ------ | ------ | ------ | ------ | ------ |
-| 1 | [ml-classify-text](https://www.npmjs.com/package/ml-classify-text) | $ npm i ml-classify-text | $ npm run ml-train | $ npm run ml-predict | /src/ml-classify-text |
-| 2 | [whichx](https://www.npmjs.com/package/whichx) | $ npm i whichx | $ npm run wx-train | $ npm run wx-predict | /src/whichx |
-| 3 | [natural](https://www.npmjs.com/package/natural) | $ npm i natural | $ npm run nt-train | $ npm run nt-predict | /src/natural |
-| 4 | [node-nlp](https://www.npmjs.com/package/node-nlp) | $ npm i node-nlp | $ npm run nn-train | $ npm run nn-predict | /src/node-nlp |
-| 5 | [bayes](https://www.npmjs.com/package/bayes) | $ npm i bayes | $ npm run bs-train | $ npm run bs-predict | /src/bayes |
-| 6 | [bayes-classifier](https://www.npmjs.com/package/bayes-classifier) | $ npm i bayes-classifier | $ npm run bc-train | $ npm run bc-predict | /src/bayes-classifier |
-| 7 | [nbayes](https://www.npmjs.com/package/nbayes) | $ npm i nbayes | $ npm run nb-train | $ npm run nb-predict | /src/nbayes |
-| 8 | [classificator](https://www.npmjs.com/package/classificator/v/0.1.3) | $ npm i classificator | $ npm run cf-train | $ npm run cf-predict | /src/classificator |
+| No | Package | npm | train | predict | tech | source |
+| ------ | ------ | ------ | ------ | ------ | ------ | ------ |
+| 1 | [ml-classify-text](https://www.npmjs.com/package/ml-classify-text) | $ npm i ml-classify-text | $ npm run ml-train | $ npm run ml-predict | N-grams | /src/ml-classify-text |
+| 2 | [whichx](https://www.npmjs.com/package/whichx) | $ npm i whichx | $ npm run wx-train | $ npm run wx-predict | Naive Bayes | /src/whichx |
+| 3 | [natural](https://www.npmjs.com/package/natural) | $ npm i natural | $ npm run nt-train | $ npm run nt-predict | Bayes | /src/natural |
+| 4 | [node-nlp](https://www.npmjs.com/package/node-nlp) | $ npm i node-nlp | $ npm run nn-train | $ npm run nn-predict | nn | /src/node-nlp |
+| 5 | [bayes](https://www.npmjs.com/package/bayes) | $ npm i bayes | $ npm run bs-train | $ npm run bs-predict | Naive Bayes | /src/bayes |
+| 6 | [bayes-classifier](https://www.npmjs.com/package/bayes-classifier) | $ npm i bayes-classifier | $ npm run bc-train | $ npm run bc-predict | Naive Bayes | /src/bayes-classifier |
+| 7 | [nbayes](https://www.npmjs.com/package/nbayes) | $ npm i nbayes | $ npm run nb-train | $ npm run nb-predict |  Naive Bayes | /src/nbayes |
+| 8 | [classificator](https://www.npmjs.com/package/classificator/v/0.1.3) | $ npm i classificator | $ npm run cf-train | $ npm run cf-predict | Naive Bayes | /src/classificator |
 | 9 | all test |  |  | $ npm all-predict |  |
 
 # Sentnce Splite Analysis
