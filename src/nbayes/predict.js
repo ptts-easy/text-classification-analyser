@@ -31,7 +31,7 @@ async function predict() {
   const start_time = new Date();
 
   let res_category;
-  
+
   try {
     const text = fs.readFileSync(test_path);
     const sentences = spiliter([text.toString()]);

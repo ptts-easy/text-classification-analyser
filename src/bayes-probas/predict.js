@@ -1,11 +1,11 @@
 import {spiliter} from '../util/spiliter-wink-nlp.js';
 import esMain from 'es-main';
 import * as fs from 'fs';
-import nt from 'natural';
+import bayes from 'bayes-probas';
 import catgorys from '../../datasets/category.js';
 import { test_path } from "../../config/config.js"
 
-const module_path = "./src/natural/model/model.json";
+const module_path = "./src/bayes-probas/model/model.json";
 
 let classifier = {};
 let label = "";
@@ -14,9 +14,7 @@ async function setup() {
 
   if (fs.existsSync(module_path)) {
     const model_json = fs.readFileSync(module_path, 'utf8');
-    const model_obj = JSON.parse(model_json);
-    classifier = model_obj;
-    nt.BayesClassifier.restore(classifier, null);
+    classifier = bayes.fromJson(model_json)
     console.log("model loaded !!!");
     return true;
   } else {
@@ -39,8 +37,15 @@ async function predict() {
     console.log(`Total sentences = ${sentences.length}`);
 
     for (let sentence of sentences) {
-      res_category = classifier.classify(sentence);
-      console.log(label, "Classification Result  ===> ", res_category);
+      let prediction = classifier.categorize(sentence);
+      res_category = prediction.chosenCategory;
+//      console.log(label, "Classification Result  ===> ", res_category);
+      for (const item of prediction.probas) {
+        if (item.category == res_category) {
+          console.log(label, "Classification Result  ===> ", `${item.category} (${item.proba})`)
+          break;
+        }
+      }
     }
   } catch (err) {
     console.log(`read "${test_path}" file failed !!!`);

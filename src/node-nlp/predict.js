@@ -31,7 +31,7 @@ async function predict() {
   const start_time = new Date();
 
   let res_category;
-  
+
   try {
     const text = fs.readFileSync(test_path);
     const sentences = spiliter([text.toString()]);
@@ -39,9 +39,10 @@ async function predict() {
     console.log(`Total sentences = ${sentences.length}`);
 
     for (let sentence of sentences) {
-      let value = await classifier.process('en', sentence);
-      res_category = value.intent;
-      console.log(label, "Classification Result  ===> ", res_category);
+      let prediction = await classifier.process('en', sentence);
+      console.log(label, "Classification Result  ===> ", `${prediction.intent} (${prediction.score})`)
+//      res_category = prediction.intent;
+//      console.log(label, "Classification Result  ===> ", res_category);
     }
   } catch (err) {
     console.log(`read "${test_path}" file failed !!!`);

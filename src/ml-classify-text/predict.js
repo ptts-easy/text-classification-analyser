@@ -33,6 +33,7 @@ async function predict() {
   const start_time = new Date();
 
   let res_category;
+
   const fRes = new Map();
   let fVal = 0;
   let fMin = 0.001;
@@ -49,24 +50,23 @@ async function predict() {
 
     for (let sentence of sentences) {
 //      let predictions = classifier.predict(sentence, 100, 0.0);
+//    
+//      if (predictions.length) {
+//        predictions.forEach(prediction => {
+//          if(prediction.confidence > fMin) {
+//            fVal = fRes.get(prediction.label);
+//            fVal += Math.log(prediction.confidence);
+//            fRes.set(prediction.label, fVal);
+//          }
+//        })
+//      } else {
+//        console.log('No predictions returned')
+//      }
+
       let predictions = classifier.predict(sentence, 1, 0.0);
-    
-      if (predictions.length) {
-        predictions.forEach(prediction => {
-/*
-          console.log(`${prediction.label} (${prediction.confidence})`)
-          if(prediction.confidence > fMin) {
-            fVal = fRes.get(prediction.label);
-            fVal += Math.log(prediction.confidence);
-            fRes.set(prediction.label, fVal);
-          }
-*/
-          res_category = prediction.label;
-          console.log(label, "Classification Result  ===> ", res_category);
-        })
-      } else {
-        console.log('No predictions returned')
-      }
+      console.log(label, "Classification Result  ===> ", `${predictions[0].label} (${predictions[0].confidence})`)
+//      res_category = prediction.label;
+//      console.log(label, "Classification Result  ===> ", res_category);
     }
   } catch (err) {
     console.log(`read "${test_path}" file failed !!!`);

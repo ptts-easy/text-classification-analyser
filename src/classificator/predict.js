@@ -29,7 +29,7 @@ async function predict() {
   const start_time = new Date();
 
   let res_category;
-  
+
   try {
     const text = fs.readFileSync(test_path);
     const sentences = spiliter([text.toString()]);
@@ -37,9 +37,15 @@ async function predict() {
     console.log(`Total sentences = ${sentences.length}`);
 
     for (let sentence of sentences) {
-      let value = classifier.categorize(sentence);
-      res_category = value.predictedCategory;
-      console.log(label, "Classification Result  ===> ", res_category);
+      let prediction = classifier.categorize(sentence);
+      res_category = prediction.predictedCategory;
+//      console.log(label, "Classification Result  ===> ", res_category);
+      for (const item of prediction.likelihoods) {
+        if (item.category == res_category) {
+          console.log(label, "Classification Result  ===> ", `${item.category} (${item.proba})`)
+          break;
+        }
+      }
     }
   } catch (err) {
     console.log(`read "${test_path}" file failed !!!`);
