@@ -6,7 +6,8 @@ export async function logProgrss(title, msg, total, onProcss, onComplete) {
     format: `${title} |${_colors.cyan('{bar}')}| {percentage}% || ${msg}: {value}/{total} || Category: {category}`,
     barCompleteChar: '\u2588',
     barIncompleteChar: '\u2591',
-    hideCursor: true
+    hideCursor: true,
+    noTTYOutput: true
   }
 
   console.log('');
@@ -41,7 +42,8 @@ export function logProgresser_selftest() {
       format: 'CLI Progress |' + _colors.cyan('{bar}') + '| {percentage}% || {value}/{total} Chunks || Speed: {speed}',
       barCompleteChar: '\u2588',
       barIncompleteChar: '\u2591',
-      hideCursor: true
+      hideCursor: true,
+      noTTYOutput: true
   });
 
   // initialize the bar -  defining payload token "speed" with the default value "N/A"

@@ -20,7 +20,7 @@ async function setup() {
 
 //    classifier.load(module_path);
   } else {
-    classifier = new NlpManager({ languages: ['en'], forceNER: true });
+    classifier = new NlpManager({ languages: ['en'], modelFileName: module_path, forceNER: true });
   }
 }
 
@@ -63,8 +63,8 @@ async function train() {
 
   console.log("train ended !!!");
   
-  let model_json = classifier.export(true);
-  fs.writeFileSync(module_path, model_json, 'utf8');
+//  let model_json = classifier.export(true);
+//  fs.writeFileSync(module_path, model_json, 'utf8');
 
   console.log("model saved !!!");
 }
