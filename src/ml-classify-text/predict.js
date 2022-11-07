@@ -3,7 +3,7 @@ import esMain from 'es-main';
 import * as fs from 'fs';
 import * as mlct from 'ml-classify-text';
 import catgorys from '../../datasets/category.js';
-import { test_path } from "../../config/config.js"
+import { test_path, SHOW_CLASSIFICATION_RESULT } from "../../config/config.js"
 
 const module_path = "./src/ml-classify-text/model/model.json";
 
@@ -34,12 +34,18 @@ async function predict() {
 
   let res_category;
 
-  const fRes = new Map();
-  let fVal = 0;
-  let fMin = 0.001;
+//  const fRes = new Map();
+//  let fVal = 0;
+//  let fMin = 0.001;
+//
+//  for (let catgory of catgorys) {
+//    fRes.set(catgory, fVal);
+//  }
+  
+  const cRes = new Map();
 
   for (let catgory of catgorys) {
-    fRes.set(catgory, fVal);
+    cRes.set(catgory, 0);
   }
 
   try {
@@ -64,8 +70,11 @@ async function predict() {
 //      }
 
       let predictions = classifier.predict(sentence, 1, 0.0);
-      console.log(label, "Classification Result  ===> ", `${predictions[0].label} (${predictions[0].confidence})`)
-//      res_category = prediction.label;
+      res_category = predictions[0].label;
+      cRes.set(res_category, cRes.get(res_category) + 1);
+      if (SHOW_CLASSIFICATION_RESULT == true) {
+        console.log(label, "Classification Result  ===> ", `${predictions[0].label} (${predictions[0].confidence})`)
+      }
 //      console.log(label, "Classification Result  ===> ", res_category);
     }
   } catch (err) {
@@ -78,6 +87,8 @@ async function predict() {
   console.log("Prediction Time :", (end_time.valueOf() - start_time.valueOf())/1000); 
 
 //  console.log("predict ended !!!"); 
+
+  console.log(cRes);
 
 /*
   let sorted_result = [];

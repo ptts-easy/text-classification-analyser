@@ -3,7 +3,7 @@ import esMain from 'es-main';
 import * as fs from 'fs';
 import bayes from 'bayes-probas';
 import catgorys from '../../datasets/category.js';
-import { test_path } from "../../config/config.js"
+import { test_path, SHOW_CLASSIFICATION_RESULT } from "../../config/config.js"
 
 const module_path = "./src/bayes-probas/model/model.json";
 
@@ -30,6 +30,12 @@ async function predict() {
 
   let res_category;
 
+  const cRes = new Map();
+
+  for (let catgory of catgorys) {
+    cRes.set(catgory, 0);
+  }
+
   try {
     const text = fs.readFileSync(test_path);
     const sentences = spiliter([text.toString()]);
@@ -39,11 +45,14 @@ async function predict() {
     for (let sentence of sentences) {
       let prediction = classifier.categorize(sentence);
       res_category = prediction.chosenCategory;
-//      console.log(label, "Classification Result  ===> ", res_category);
-      for (const item of prediction.probas) {
-        if (item.category == res_category) {
-          console.log(label, "Classification Result  ===> ", `${item.category} (${item.proba})`)
-          break;
+      cRes.set(res_category, cRes.get(res_category) + 1);
+      if (SHOW_CLASSIFICATION_RESULT == true) {
+  //      console.log(label, "Classification Result  ===> ", res_category);
+        for (const item of prediction.probas) {
+          if (item.category == res_category) {
+            console.log(label, "Classification Result  ===> ", `${item.category} (${item.proba})`)
+            break;
+          }
         }
       }
     }
@@ -57,6 +66,8 @@ async function predict() {
   console.log("Prediction Time :", (end_time.valueOf() - start_time.valueOf())/1000); 
 
 //  console.log("predict ended !!!"); 
+
+  console.log(cRes);
 }
 
 export async function main(_label) {

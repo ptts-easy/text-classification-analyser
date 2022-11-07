@@ -14,3 +14,5 @@ export const split_time_show = true;
 export const INPUT_MIN_WORDS = 5;
 
 export const INPUT_MAX_WORDS = 50;
+
+export const SHOW_CLASSIFICATION_RESULT = true;

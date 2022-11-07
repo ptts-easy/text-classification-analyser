@@ -17,8 +17,10 @@ async function setup() {
     classifier = new WhichX();
     classifier.import(model_obj);
     console.log("model loaded !!!");
+    classifier.addLabels(catgorys);
   } else {
     classifier = new WhichX();
+    classifier.addLabels(catgorys);
   }
 }
 
