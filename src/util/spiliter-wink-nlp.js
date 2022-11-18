@@ -11,7 +11,7 @@ const its = nlp.its;
 // Obtain "as" reducer helper to reduce a collection.
 const as = nlp.as;
 
-function texts_paser(texts) {
+function texts_parser(texts) {
   if(texts == undefined) {
     return [];
   }
@@ -23,7 +23,7 @@ function texts_paser(texts) {
   let sentences;
 
   for(let i = 0; i < n; i ++) {
-    sentences = text_paser(texts[i]);
+    sentences = text_parser(texts[i]);
 
     if(sentences.length < 1) {
       continue;
@@ -35,7 +35,7 @@ function texts_paser(texts) {
   return total_sentences;
 }
 
-function text_paser(text) {
+function text_parser(text) {
 
   const doc = nlp.readDoc( text );
 
@@ -65,7 +65,7 @@ export function selftest(texts) {
 
   const start_time = new Date();
   
-  const sentences = texts_paser(texts);
+  const sentences = texts_parser(texts);
   
   const end_time = new Date();
 
@@ -83,5 +83,5 @@ export function selftest(texts) {
 }
 
 export function spiliter(texts) {
-  return texts_paser(texts);
+  return texts_parser(texts);
 }
