@@ -27,6 +27,6 @@ This project is text classification analysis and sentence split analysis tool fo
 | 4 | [wink-nlp](https://www.npmjs.com/package/wink-nlp)| $ npm i wink-nlp | src/util/spiliter-wink-nlp.js |
 |  | all test | $ npm run split |  |
 
-## contact
+## references
 
-  If you need to contact me, you can do it at the email faco0909@outlook.com
+  -
